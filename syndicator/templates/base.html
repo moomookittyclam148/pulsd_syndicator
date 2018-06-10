@@ -5,10 +5,9 @@
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 <main>
@@ -298,19 +297,80 @@
       </div>
 
       <div class="form-group col-xs-4">
-        <div class="input-group date" id="start_date" data-target-input="nearest">
-          <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-            </div>
-        </div>
+        <label for="start_date">Start Date</label>
+        <input type="text" class="form-control" id="start_date" placeholder="MM/DD/YYYY">
       </div>
-      <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
 
+      <div class="form-group col-xs-4">
+        <label for="start_time">Start Time</label>
+        <input type="text" class="form-control" id="start_time" placeholder="HH:MM">
+      </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="form-group col-xs-4">
+      <label for="end_date">End Date</label>
+      <input type="text" class="form-control" id="end_date" placeholder="MM/DD/YYYY">
+    </div>
+
+    <div class="form-group col-xs-4">
+      <label for="end_time">End Time</label>
+      <input type="text" class="form-control" id="end_time" placeholder="HH:MM">
+    </div>
+    <div class="col-xs">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="Radio1" id="choice1" value="option1" checked>
+        <label class="form-check-label" for="Radio1">
+          Free Ticket
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="Radio2" id="choice2" value="option2">
+        <label class="form-check-label" for="Radio2">
+          Paid Ticket
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="Radio3" id="choice3" value="option3">
+        <label class="form-check-label" for="Radio3">
+          Donation
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-xs-4" id="event_type">
+      <label class="form-check-label" for="event_type">Event Type</label>
+      <select class="form-control">
+        <option value="" selected="selected">Select an event type</option>
+        <option value="Auto & Boat">Auto, Boat &amp; Air</option>
+        <option value="Business & Professional">Business &amp; Professional</option>
+        <option value="Charity & Causes">Charity &amp; Causes</option>
+        <option value="Community & Culture">Community &amp; Culture</option>
+        <option value="Family & Education">Family &amp; Education</option>
+        <option value="Fashion & Beauty">Fashion &amp; Beauty</option>
+        <option value="Film, Media & Entertainment">Film, Media &amp; Entertainment</option>
+        <option value="Food & Drink">Food &amp; Drink</option>
+        <option value="Government & Politics">Government &amp; Politics</option>
+        <option value="Health & Wellness">Health &amp; Wellness</option>
+        <option value="Hobbies & Special Interest">Hobbies &amp; Special Interest</option>
+        <option value="Home & Lifestyle">Home &amp; Lifestyle</option>
+        <option value="Music">Music</option>
+        <option value="Other">Other</option>
+        <option value="Performing & Visual Arts">Performing &amp; Visual Arts</option>
+        <option value="Religion & Spirituality">Religion &amp; Spirituality</option>
+        <option value="School Activities">School Activities</option>
+        <option value="Science & Technology">Science &amp; Technology</option>
+        <option value="Seasonal & Holiday">Seasonal &amp; Holiday</option>
+        <option value="Sports & Fitness">Sports &amp; Fitness</option>
+        <option value="Travel & Outdoor">Travel &amp; Outdoor</option>
+      </select>
+    </div>
   </div>
 
 
