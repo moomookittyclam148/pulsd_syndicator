@@ -1,33 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Page Title</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
 <main>
   <div class="container center_div">
-    <form>
+    <form action="" method="post">
       <div class="row">
         <div class="form-group col-xs-4">
           <label for="event_title">Event Title</label>
-          <input type="event_title" class="form-control" id="event_title" placeholder="Place Event Title Here">
+          <input type="event_title" class="form-control" name="event_title" id="event_title" placeholder="Place Event Title Here">
         </div>
 
         <div class="form-group col-xs-4">
           <label for="address_1">Address Line 1</label>
-          <input type="address_1" class="form-control" id="address_1" placeholder="Address line 1">
+          <input type="text" class="form-control" name="address_1" id="address_1" placeholder="Address line 1">
           <p class="help-block">Street address, P.O. box, company name, c/o</p>
         </div>
     <!-- address-line2 input-->
         <div class="form-group col-xs-4">
           <label for="address_2">Address Line 2</label>
-          <input type="address_1" class="form-control" id="address_2" placeholder="Address line 2">
+          <input type="address_1" class="form-control" name="address_2" id="address_2" placeholder="Address line 2">
           <p class="help-block">Apartment, suite , unit, building, floor, etc.</p>
         </div>
       </div>
@@ -35,17 +25,17 @@
       <div class="row">
         <div class="form-group col-xs-4">
           <label for="city">City / Town</label>
-          <input type="city" class="form-control" id="city" placeholder="city">
+          <input type="city" class="form-control" name="city" id="city" placeholder="city">
         </div>
     <!-- region input-->
         <div class="form-group col-xs-4">
           <label for="state">State / Province / Region</label>
-          <input type="state" class="form-control" id="state" placeholder="State / Province / Region">
+          <input type="state" class="form-control" name="state" id="state" placeholder="State / Province / Region">
         </div>
     <!-- postal-code input-->
         <div class="form-group col-xs-4">
           <label for="zip_code">Zip / Postal Code</label>
-          <input type="zip_code" class="form-control" id="zip_code" placeholder="Zip or Postal Code">
+          <input type="zip_code" class="form-control" name="zip_code" id="zip_code" placeholder="Zip or Postal Code">
         </div>
       </div>
     <!-- country select -->
@@ -298,12 +288,12 @@
 
       <div class="form-group col-xs-4">
         <label for="start_date">Start Date</label>
-        <input type="text" class="form-control" id="start_date" placeholder="MM/DD/YYYY">
+        <input type="text" class="form-control" name="start_date" id="start_date" placeholder="MM/DD/YYYY">
       </div>
 
       <div class="form-group col-xs-4">
         <label for="start_time">Start Time</label>
-        <input type="text" class="form-control" id="start_time" placeholder="HH:MM">
+        <input type="text" class="form-control" name="start_time" id="start_time" placeholder="HH:MM">
       </div>
 
   </div>
@@ -312,30 +302,30 @@
 
     <div class="form-group col-xs-4">
       <label for="end_date">End Date</label>
-      <input type="text" class="form-control" id="end_date" placeholder="MM/DD/YYYY">
+      <input type="text" class="form-control" name="end_date" id="end_date" placeholder="MM/DD/YYYY">
     </div>
 
     <div class="form-group col-xs-4">
       <label for="end_time">End Time</label>
-      <input type="text" class="form-control" id="end_time" placeholder="HH:MM">
+      <input type="text" class="form-control" name="end_time" id="end_time" placeholder="HH:MM">
     </div>
     <div class="col-xs">
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="Radio1" id="choice1" value="option1" checked>
+        <input class="form-check-input" type="radio" name="Radio" id="choice1" value="Free Ticket" checked>
         <label class="form-check-label" for="Radio1">
           Free Ticket
         </label>
       </div>
 
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="Radio2" id="choice2" value="option2">
+        <input class="form-check-input" type="radio" name="Radio" id="choice2" value="Paid Ticket">
         <label class="form-check-label" for="Radio2">
           Paid Ticket
         </label>
       </div>
 
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="Radio3" id="choice3" value="option3">
+        <input class="form-check-input" type="radio" name="Radio" id="choice3" value="Donation">
         <label class="form-check-label" for="Radio3">
           Donation
         </label>
@@ -346,7 +336,7 @@
   <div class="row">
     <div class="form-group col-xs-4" id="event_type">
       <label class="form-check-label" for="event_type">Event Type</label>
-      <select class="form-control">
+      <select class="form-control" name="event_type">
         <option value="" selected="selected">Select an event type</option>
         <option value="Auto & Boat">Auto, Boat &amp; Air</option>
         <option value="Business & Professional">Business &amp; Professional</option>
@@ -371,17 +361,31 @@
         <option value="Travel & Outdoor">Travel &amp; Outdoor</option>
       </select>
     </div>
+
+    <div class="form-group">
+      <label for="event_img">Select Event Image</label>
+      <input type="file" class="form-control-file" name="event_img" id="event_img" accept=".png, .jpg, .jpeg">
+    </div>
   </div>
 
 
       <div class="row">
         <div class="form-group align-self-center">
           <label for="event_desc">Event Description</label>
-          <textarea class="form-control" id="event_desc" rows="4"></textarea>
+          <textarea class="form-control" name="event_desc" id="event_desc" rows="4"></textarea>
         </div>
       </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+      <br><br>
+
+      {% if error_msg %}
+      {% for error in error_msg %}
+        <p style="color:#FF0000">{{error}}</p>
+      {% endfor %}
+      {% endif %}
     </form>
   </div>
 </main>
-</body>
-</html>
+{% endblock %}

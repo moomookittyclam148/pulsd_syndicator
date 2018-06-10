@@ -13,5 +13,6 @@ CREATE TABLE event (
     event_img TEXT,
     event_desc TEXT,
     event_type TEXT,
-    ticket_type TEXT
+    ticket_type TEXT,
+    date_created TEXT
 );
