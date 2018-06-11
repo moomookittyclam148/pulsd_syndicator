@@ -9,6 +9,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 password = 'Pulsdpulsd1'
 
+# Gets all of the events in the database created within the last hour and adds them to
+# the specified websites.
 def syndicate():
     current_time = datetime.datetime.now()
     prev_time = current_time - timedelta(hours=1)
@@ -16,13 +18,14 @@ def syndicate():
     events = event.query.filter(event.date_created.between(str(prev_time), str(current_time))).all()
 
     for event in events:
-        add_event_eventbrite(event)
-        add_event_yelp(event)
-        add_event_eventcrazy(event)
-        add_event_youreventfree(event)
-        add_event_eventzilla(event)
+        add_event_eventbrite(event)     #Functional
+        #add_event_yelp(event)          #Not Functional
+        #add_event_eventcrazy(event)    #Not Functional
+        #add_event_youreventfree(event) #Not Functional
+        add_event_eventzilla(event)     #functional
 
 
+# Test inputs for add_event functions
 start_date = datetime.datetime(2018,6,20,10,15)
 end_date = datetime.datetime(2018,6,21,12,15)
 
@@ -30,7 +33,7 @@ new_event = event('Free Chicken', '1345 Amsterdam Ave', 'New York', 'NY', '10027
                   'US', start_date, end_date, '',
                   'test', 'other', 'Free ticket')
 
-
+#adds events to eventbrite.com
 def add_event_eventbrite(event):
     driver = webdriver.Chrome()
     driver.get("https://www.eventbrite.com/create")
@@ -69,29 +72,34 @@ def add_event_eventbrite(event):
     driver.find_element_by_xpath('//*[@id="make-event-live-button-almost-done"]').click()
 
 
-def add_event_test2(event):
+def add_event_yelp(event):
     driver = webdriver.Chrome()
     driver.get("https://www.yelp.com/events/create")
     if driver.current_url != "https://www.yelp.com/events/create":
-        driver.implicitly_wait(5)
-        driver.find_element_by_xpath('//input[@id="email"]').send_keys('marodriguez148@gmail.com')
+        #driver.implicitly_wait(5)
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//input[@id="email"]'))).send_keys('marodriguez148@gmail.com')
+        #driver.find_element_by_xpath('//input[@id="email"]').send_keys('marodriguez148@gmail.com')
         driver.find_element_by_xpath('//input[@id="password"]').send_keys(password)
         driver.find_element_by_xpath('//*[@id="ajax-login"]/button').click()
 
-def add_event_yelp(event):
-    print('yelp')
-
 def add_event_eventcrazy(event):
-    print('eventcrazy')
+    driver = webdriver.Chrome()
+    driver.get("https://www.eventcrazy.com/")
+    driver.find_element_by_xpath('//*[@id="menu_containerRight"]/div[1]/div[1]/a').click()
+    driver.implicitly_wait(10)
+    #driver.find_element_by_name('lUserName').send_keys('mrodr013')
+    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, "lUserName"))).send_keys('mrodr013')
+    driver.find_element_by_xpath('/html/body/div[4]/form/div[2]/input').send_keys(password)
+    driver.find_element_by_xpath('/html/body/div[4]/form/div[3]/input').click()
+    driver.get('https://www.eventcrazy.com/event/submit.cfm')
 
 def add_event_youreventfree(event):
     print('youreventfree')
 
+#Adds Events to eventzilla.com
 def add_event_eventzilla(event):
     driver = webdriver.Chrome()
     driver.get("https://www.eventzilla.net/admin/eventadd")
-
-
     if driver.current_url != "https://www.eventzilla.net/admin/eventadd":
         driver.implicitly_wait(10)
         driver.find_element_by_xpath('//*[@id="ctl00_cph_newtheme_main_UserName"]').send_keys('marodriguez148@gmail.com')
@@ -130,3 +138,5 @@ def add_event_eventzilla(event):
     driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_EventTickets_txtQuantity"]').send_keys('100')
     driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_EventTickets_btnSave"]').click()
     driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_btnPublishEvent"]').click()
+
+#add_event_test2(new_event)

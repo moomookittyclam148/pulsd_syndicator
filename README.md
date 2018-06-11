@@ -14,6 +14,7 @@ product_description, product_price etc.) in database as per requirement.
 - User is running the app with Chrome using Mac Os(selenium uses a specific Mac Os Google Chrome driver)
 - Most security features not implemented(Such as, Cross-site-scripting, sql-injection, etc)
 - Only basic information is used to create the event(Such as, Event name, address, dates and times)
+  - Multiple websites make it hard for selenium to find input elements and fill them in so minimal data is entered for the event.
 
 ##requirements
 Python 3.6.3  

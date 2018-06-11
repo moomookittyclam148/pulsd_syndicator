@@ -2,6 +2,7 @@ from main import db
 from sqlalchemy.exc import *
 import datetime
 
+# Model for events table
 class event(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     event_name = db.Column(db.String(80), nullable=False)
