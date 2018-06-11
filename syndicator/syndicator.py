@@ -24,7 +24,7 @@ def syndicate():
 
 
 start_date = datetime.datetime(2018,6,20,10,15)
-end_date = datetime.datetime(2018,6,20,12,15)
+end_date = datetime.datetime(2018,6,21,12,15)
 
 new_event = event('Free Chicken', '1345 Amsterdam Ave', 'New York', 'NY', '10027',
                   'US', start_date, end_date, '',
@@ -88,6 +88,45 @@ def add_event_youreventfree(event):
     print('youreventfree')
 
 def add_event_eventzilla(event):
-    print('eventzilla')
+    driver = webdriver.Chrome()
+    driver.get("https://www.eventzilla.net/admin/eventadd")
 
-add_event_test(new_event)
+
+    if driver.current_url != "https://www.eventzilla.net/admin/eventadd":
+        driver.implicitly_wait(10)
+        driver.find_element_by_xpath('//*[@id="ctl00_cph_newtheme_main_UserName"]').send_keys('marodriguez148@gmail.com')
+        driver.find_element_by_xpath('//*[@id="ctl00_cph_newtheme_main_Password"]').send_keys(password)
+        element = driver.find_element_by_xpath('//*[@id="ctl00_cph_newtheme_main_Login"]')
+        driver.execute_script("arguments[0].click();", element)
+        driver.implicitly_wait(10)
+        element = driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_CreateEvent_btnSave"]')
+        driver.execute_script("arguments[0].click();", element)
+
+    event_address = event.address + ", " + event.city + ", " + event.state + " " + event.zip_code
+    event_start_date = event.start_date.strftime("%m/%d/%Y")
+    event_start_time = event.start_date.strftime("%H:%M")
+    event_end_date = event.end_date.strftime("%m/%d/%Y")
+    event_end_time = event.end_date.strftime("%H:%M")
+
+    driver.implicitly_wait(10)
+    driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_CreateEvent_txtEventTitle"]').send_keys(event.event_name)
+    type_element = driver.find_element_by_xpath('//*[@id="s2id_autogen1"]')
+    type_element.send_keys('Other Events')
+    type_element.send_keys(Keys.ENTER)
+    driver.switch_to.frame(driver.find_element_by_tag_name("iframe"))
+    driver.find_element_by_xpath('//*[@id="tinymce"]').send_keys(event.event_desc)
+    driver.switch_to.default_content()
+    driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_CreateEvent_txtStartDate"]').send_keys(event_start_date)
+    driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_CreateEvent_sel_StartTime"]').send_keys(event_start_time)
+    driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_CreateEvent_txtEndDate"]').send_keys(event_end_date)
+    driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_CreateEvent_sel_EndTime"]').send_keys(event_end_time)
+    element = driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_CreateEvent_btnSaveEvent"]')
+    driver.execute_script("arguments[0].click();", element)
+    #action = webdriver.ActionChains(driver)
+    #action.click(element).perform();
+
+    driver.find_element_by_id('ctl00_ContentPlaceHolder1_UC_EventTickets_lkAddCategory').click()
+    driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_EventTickets_txtCatTicketType"]').send_keys('RSVP')
+    driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_EventTickets_txtQuantity"]').send_keys('100')
+    driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_UC_EventTickets_btnSave"]').click()
+    driver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_btnPublishEvent"]').click()
