@@ -1,5 +1,5 @@
 from models import *
-from datetime import timedelta, datetime
+from datetime import timedelta
 from sqlalchemy.exc import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -23,15 +23,15 @@ def syndicate():
         add_event_eventzilla(event)
 
 
-start_date = datetime(2018,6,20,10,15)
-end_date = datetime(2018,6,20,12,15)
+start_date = datetime.datetime(2018,6,20,10,15)
+end_date = datetime.datetime(2018,6,20,12,15)
 
 new_event = event('Free Chicken', '1345 Amsterdam Ave', 'New York', 'NY', '10027',
                   'US', start_date, end_date, '',
                   'test', 'other', 'Free ticket')
 
 
-def add_event_test(event):
+def add_event_eventbrite(event):
     driver = webdriver.Chrome()
     driver.get("https://www.eventbrite.com/create")
     if driver.current_url != "https://www.eventbrite.com/create":
@@ -58,13 +58,7 @@ def add_event_test(event):
     driver.find_element_by_class_name('js-dtp-datepicker-input').send_keys(event_start_date)
     driver.find_element_by_class_name('js-dtp-timepicker-input').clear()
     driver.find_element_by_class_name('js-dtp-timepicker-input').send_keys(event_start_time)
-    driver.find_element_by_xpath('').clear()
-    driver.find_element_by_xpath('//div[@class="js-dtp-enddatetimepicker"]//input[@class="js-dtp-datepicker-input"]').send_keys(event_end_date)
-    driver.find_element_by_class_name('js-dtp-timepicker-input').clear()
-    driver.find_element_by_class_name('js-dtp-timepicker-input').send_keys(event_end_date)
-    driver.find_element_by_id('id_group-details-description').clear()
-    driver.find_element_by_id('id_group-details-description').send_keys(event.event_desc)
-    driver.find_element_by_id('id_group-organizer-organizers-0-organization_name').send_keys('Pulsd')
+    driver.find_element_by_xpath('//*[@id="create-ticket-free-button"]').click()
 
     driver.find_element_by_id('create-ticket-free-button').click()
     driver.find_element_by_id('id_group-tickets-1-ticket_type').send_keys('RSVP')
@@ -72,6 +66,7 @@ def add_event_test(event):
     driver.find_element_by_xpath("//select[@id='id_group-privacy_and_promotion-event_format']/option[@value='100']").click()
     driver.find_element_by_xpath("//select[@id='id_group-privacy_and_promotion-event_category']/option[@value='199']").click()
     driver.find_element_by_xpath("//a[@id='make-event-live-button-almost-done']").click()
+    driver.find_element_by_xpath('//*[@id="make-event-live-button-almost-done"]').click()
 
 
 def add_event_test2(event):
@@ -86,9 +81,6 @@ def add_event_test2(event):
 def add_event_yelp(event):
     print('yelp')
 
-def add_event_eventbrite(event):
-    print('eventbrite')
-
 def add_event_eventcrazy(event):
     print('eventcrazy')
 
@@ -97,3 +89,5 @@ def add_event_youreventfree(event):
 
 def add_event_eventzilla(event):
     print('eventzilla')
+
+add_event_test(new_event)
