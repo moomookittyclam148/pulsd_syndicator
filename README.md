@@ -38,6 +38,6 @@ urllib3==1.22
 Werkzeug==0.14.1  
 
 To install, within a new environment run  
-`pip install -r requirements.txt`  
+`pip install -r syndicator/requirements.txt`  
 To run  
-`python main.py`
+`python syndicator/main.py`
