@@ -1,4 +1,4 @@
-#Pulsd Syndicator
+#Pulsd Syndicator  
 Look up 5 websites/apps where Pulsd events can be reposted e.g. eventbrite.com. Write code
 to automate this syndication process.
 
