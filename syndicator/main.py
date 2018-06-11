@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
+from datetime import *
+from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///event.db'
@@ -12,7 +14,6 @@ from models import *
 def base_page():
     if request.method == "POST":
         error_msg = []
-        print(request.form)
 
         event_name = request.form['event_title']
         address = request.form['address_1'] + " " + request.form['address_2']
@@ -70,4 +71,8 @@ def isValidDate(date):
 
 
 if __name__ == "__main__":
+    from syndicator import syndicate
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(syndicate, 'interval', minutes=60, id='syndicate_job')
+    scheduler.start()
     app.run(debug=True)
